@@ -1,0 +1,43 @@
+import boto3
+def create_dynamoDB_table(table_name):
+    try:
+        client = boto3.client('dynamodb')
+        response = client.create_table(
+        AttributeDefinitions=[
+            {
+                'AttributeName': 'UserId',
+                'AttributeType': 'S' 
+            }, 
+            { 
+                'AttributeName': 'Branch',
+                'AttributeType': 'S' 
+            },
+        ],
+        TableName=table_name,
+        KeySchema=[
+            {
+                'AttributeName': 'UserId',
+                'KeyType': 'HASH'
+            },
+            {
+                'AttributeName': 'Branch',
+                'KeyType': 'RANGE'
+            },
+        ],
+        BillingMode='PROVISIONED',
+        ProvisionedThroughput={
+            'ReadCapacityUnits': 2,
+            'WriteCapacityUnits': 2
+        }
+    )
+        print(f"The table'{table_name}' created successfully ")
+    except Exception as e :
+        print("An Exception has occurred while creating the table",e)
+
+
+if __name__ == '__main__':
+    try:
+        table_name = input("Enter the table name: ") .strip()
+        create_dynamoDB_table(table_name)
+    except Exception as e :
+        print("An Exception has occured while name the table",e)
