@@ -3,14 +3,17 @@ import json
 
 def add_data_in_DynamoTable(table_name):
     try:
-        client = boto3.client('dynamobd')
+        client = boto3.client('dynamobd', region_name='us-west-1')
         response = client.put_item(
             TableName = 'First-table',
             Item = {
-                'AlbumTile': {
+                'UserId': {
             'S': 'vintageSongs',
-            'N': '8090',
-        }
+        },
+            'Branch': {
+                'N': 'Bollywood'
+            }
+
             }
         )
     except Exception as e :
@@ -21,4 +24,4 @@ if __name__ == '__main__':
         table_name = 'First-table'
         add_data_in_DynamoTable(table_name)
     except Exception as e:
-        print("An erroe occured while reading the tavle nanme")
+        print("An erroe occured while reading the table nanme")
