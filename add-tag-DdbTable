@@ -4,19 +4,25 @@ def tagresource_ddbtable(table_name):
     try:
         client = boto3.client('dynamodb')
         response = client.tag_resource(
-            ResourceArn='arn:aws:dynamodb:us-west-2:697429983773:table/First-table',
+            ResourceArn='arn:aws:dynamodb:us-west-2:697429983773:table/dbTable',
             Tags=[
                 {
-                    'Key': 'owner', 
-                    'Value': 'Anchal',
+                    'Key': 'Owner',
+                    'Value': 'Anchal'
+                },
+                {
                     'Key':  'Name',
                     'Value':  'AnchalAgrahari'
                 },
+                {
+                    'Key': 'costCenter',
+                    'Value': '1234567890'
+                }
             ]
         )
-        print("The tag added successfully >3")
+        print(f"The tag added successfully in {table_name} >3")
     except Exception as e:
-        print("An Exception occured whilt addind tag in DDB Table",e)
+        print("An Exception occured while addind tag in DDB Table",e)
 
 
 if __name__ == '__main__':
