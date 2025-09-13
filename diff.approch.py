@@ -57,3 +57,8 @@ if __name__ == '__main__':
         add_data_in_DynamoTable(table_name)
     except Exception as e:
         print("An erroe occured while reading the tavle nanme")
+
+
+
+
+
