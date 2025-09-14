@@ -1,0 +1,25 @@
+import boto3
+import json
+client = boto3.client('dynamodb', region_name='us-west-2')
+
+def getData_from_dynamoTable(table_name):
+    try:
+        response = client.get_item(
+            TableName= table_name,
+            Key={
+                'UserId': {'S': 'kuldeep'},
+                'Branch': {'S': 'N Veriginia'}
+            }
+        )
+        if 'Item' in response:
+            print("we got the item yehhh!!!")
+            print(json.dumps(response['Item'], indent=4))
+        else:
+            print("Item is not found in the table.")
+    except Exception as e:
+        print("An error occured",e)
+
+if __name__ == '__main__':
+    table_name = 'dbTable'
+    getData_from_dynamoTable(table_name)
+
