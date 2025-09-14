@@ -3,20 +3,29 @@ import json
 
 def add_data_in_DynamoTable(table_name):
     try:
-        dynamodb_client = boto3.client("dynamodb")
+        dynamodb_client = boto3.client('dynamodb', region_name='us-west-2')
         response = dynamodb_client.put_item(
             TableName = table_name,
             Item={
                 'UserId': {
-                    'S': 'kuldeepyadav'
+                    'S': 'kuldeep'
                 },
                 'Branch': {
                     'S': 'N Veriginia'
                 },
                 'Skills': {
                     'S': 'Presentation'
+                },
+                'UserId': {
+                    'S': 'Anchal'
+                },
+                'Branch': {
+                    'S': 'Oregon'
+                },
+                'Skills': {
+                    'S': 'Backend'
                 }
-            }
+            },
         )
         print(f"The item were added in the {table_name} in dynamoDB Table.")
     except Exception as e :
@@ -24,7 +33,7 @@ def add_data_in_DynamoTable(table_name):
 
 if __name__ == '__main__':
     try:
-        table_name = 'First-table'
+        table_name = 'dbTable'
         add_data_in_DynamoTable(table_name)
     except Exception as e:
         print("An error occured while reading the table name", e)
