@@ -1,0 +1,26 @@
+import boto3
+import json
+
+def add_tags_to_ddbTable_from_jsonfile(table_arn, filePath):
+    try:
+        with open (filePath, 'r') as file :
+            first_table = json.load(file)
+
+        tag_set = [{'Key':key, 'Value': value}for key, value in first_table.items()]
+        client = boto3.client('dynamodb', region_name='us-west-2')
+        response = client.tag_resource(
+            ResourceArn=table_arn,
+            Tags= tag_set
+        )
+        print("Tags were added Successufully!")
+        print(response)
+    except Exception as e:
+        print("An error has occured while reading file or adding tags in the dynamo Table",e)
+
+if __name__=='__main__':
+    try:
+        table_arn = 'arn:aws:dynamodb:us-west-2:697429983773:table/dbTable'
+        filePath = '/home/anchal/Documents/ddb_tables/First-table.json'
+        add_tags_to_ddbTable_from_jsonfile(table_arn,filePath)
+    except Exception as e:
+        print("An error has occured while giving file path ",e)
