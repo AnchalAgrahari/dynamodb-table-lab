@@ -1,0 +1,3 @@
+import boto3
+import json
+client = boto3.client('dynamodb', region_name='us-west-2')
