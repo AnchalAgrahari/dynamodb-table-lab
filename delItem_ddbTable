@@ -1,3 +1,25 @@
 import boto3
 import json
+
 client = boto3.client('dynamodb', region_name='us-west-2')
+
+def delete_item_from_ddbTable(table_name):
+    try:
+        response = client.delete_item(
+            TableName= table_name,
+            Key={
+                'UserId': {'S': 'Surbhi'},
+                'Branch': {'S': 'N California'}
+            },
+            ReturnValues='ALL_OLD'
+        ) 
+        if 'Attributes' in response:
+            print("Item was successfully deleted")
+            print(json.dumps(response['Attributes'], indent=4))
+        else:
+            print("Item is not found in the Table")
+    except Exception as e :
+        print('An error occured while giving Key details',e)
+if __name__=='__main__':
+    table_name = 'dbTable'
+    delete_item_from_ddbTable(table_name)
