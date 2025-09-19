@@ -1,0 +1,22 @@
+# to get the keySchema
+import boto3
+
+client = boto3.client('dynamodb', region_name='us-west-2')
+
+response = client.describe_table(TableName='dbTable')
+print(response['Table']['KeySchema'])
+
+
+#to get the all item 
+import boto3
+import json
+
+dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
+table = dynamodb.Table('dbTable')
+
+response = table.scan()  # Scans entire table
+items = response.get('Items', [])
+
+print("All items in the table:")
+for item in items:
+    print(json.dumps(item, indent=4))
