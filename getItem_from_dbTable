@@ -7,9 +7,9 @@ def getData_from_dynamoTable(table_name):
         response = client.get_item(
             TableName= table_name,
             Key={
-                'UserId': {'S': 'kuldeep'},
-                'Branch': {'S': 'N Veriginia'}
-            }
+                'UserId': {'S': 'Surbhi'},
+                'Branch': {'S': 'N California'}
+            },
         )
         if 'Item' in response:
             print("we got the item yehhh!!!")
