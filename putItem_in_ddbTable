@@ -7,25 +7,19 @@ def add_data_in_DynamoTable(table_name):
         response = dynamodb_client.put_item(
             TableName = table_name,
             Item={
-                'UserId': {
-                    'S': 'kuldeep'
-                },
-                'Branch': {
-                    'S': 'N Veriginia'
-                },
-                'Skills': {
-                    'S': 'Presentation'
-                },
-                'UserId': {
-                    'S': 'Anchal'
-                },
-                'Branch': {
-                    'S': 'Oregon'
-                },
-                'Skills': {
-                    'S': 'Backend'
-                }
-            },
+                'UserId': {'S': 'kuldeep'},
+                'Branch': {'S': 'N Veriginia'},
+                'Skills': {'S': 'Presentation'},
+                'UserId': {'S': 'Anchal'},
+                'Branch': {'S': 'Oregon'},
+                'Skills': {'S': 'Backend'},
+                'UserId': {'S': 'Gungun'},
+                'Branch': {'S': 'Ohio'},
+                'Skills': {'S': 'Modling'},
+                'UserId': {'S': 'Surbhi'},
+                'Branch': {'S': 'N California'},
+                'Skills': {'S': 'NULL'}
+            }
         )
         print(f"The item were added in the {table_name} in dynamoDB Table.")
     except Exception as e :
